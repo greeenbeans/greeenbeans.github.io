@@ -28,10 +28,9 @@
 						<span class="icon fa-diamond major"></span>
 						<h2>About me</h2>
 						<p>I'm Rahil Shah, high school senior, CTFer, network engineer, coder,<br />
-						philosopher, and baker. I'm interested in computer science and cyber <br />
-						security, some of my code and exploits can be found here on this site.</p>
+						philosopher, and baker. Here you can see some of my solve scriptsestas maximus lorem ipsum dolor.</p>
 						<ul class="actions">
-							<li><a href="assets/files/Resume.docx" class="button big">Resume</a></li>	<!--add resume link-->
+							<li><a href="#" class="button big">Resume</a></li>	<!--add resume link-->
 						</ul>
 					</section>
 
@@ -42,9 +41,9 @@
 								<a href="#"><img src="images/CTF.png" alt="" /></a>
 								<h3>CTF stuff</h3>
 							</header>
-							<p>I participate in CTFs under the team redpwn. I was formerly a part of the team "Troy Tech Support" and go by the screen name Green Beans. I specialize in binary exploitation and reverse engineering</p>
+							<p>Fusce malesuada efficitur venenatis. Pellentesque tempor leo sed massa hendrerit hendrerit. In sed feugiat est, eu congue elit. Ut porta magna vel felis sodales vulputate. Donec faucibus dapibus lacus non ornare.</p>
 							<ul class="actions">
-								<li><a href="http://redpwn.xyz" class="button">More</a></li>
+								<li><a href="#" class="button">More</a></li>
 							</ul>
 						</article>
 						<article class="item">
@@ -52,27 +51,27 @@
 								<a href="#"><img src="images/bakingCover.jpg" alt="" /></a>
 								<h3>Baked goods</h3>
 							</header>
-							<p>Here's a link to an album with some of my creations</p>
+							<p>Fusce malesuada efficitur venenatis. Pellentesque tempor leo sed massa hendrerit hendrerit. In sed feugiat est, eu congue elit. Ut porta magna vel felis sodales vulputate. Donec faucibus dapibus lacus non ornare.</p>
 							<ul class="actions">
-								<li><a href="baking.html" class="button">More</a></li>
+								<li><a href="#" class="button">More</a></li>
 							</ul>
 						</article>
 						<article class="item">
 							<header>
-								<a href="#"><img src="images/philo.jpg" alt="" /></a>
-								<h3>Philo Papers</h3>
+								<a href="#"><img src="images/pic03.jpg" alt="" /></a>
+								<h3>Philo Papers maybe</h3>
 							</header>
-							<p>I enjoy reading and writing philosophy. Here are a few of the papers I am proud of</p>
+							<p>Fusce malesuada efficitur venenatis. Pellentesque tempor leo sed massa hendrerit hendrerit. In sed feugiat est, eu congue elit. Ut porta magna vel felis sodales vulputate. Donec faucibus dapibus lacus non ornare.</p>
 							<ul class="actions">
-								<li><a href="https://drive.google.com/drive/folders/1OUTLI5Bjf6uJ9_XZ9thq2lykXQvZ7bvd?usp=sharing" class="button">More</a></li>
+								<li><a href="#" class="button">More</a></li>
 							</ul>
 						</article>
 						<article class="item">
 							<header>
 								<a href="#"><img src="images/pic04.jpg" alt="" /></a>
-								<h3>stuff</h3>
+								<h3>TBD</h3>
 							</header>
-							<p></p>
+							<p>Fusce malesuada efficitur venenatis. Pellentesque tempor leo sed massa hendrerit hendrerit. In sed feugiat est, eu congue elit. Ut porta magna vel felis sodales vulputate. Donec faucibus dapibus lacus non ornare.</p>
 							<ul class="actions">
 								<li><a href="#" class="button">More</a></li>
 							</ul>
@@ -103,11 +102,13 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="icons">
-							<li><a href="https://github.com/Girafobli1" class="icon fa-github"><span class="label">Github</span></a></li>
-							<li><a href="https://www.linkedin.com/in/rahil-shah-383b7715a/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:rahilshah042@gmail.com" class="icon fa-envelope"><span class="label">Email</span></a></li>
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
 						</ul>
-						<p class="copyright">Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+						<p class="copyright">&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
 					</footer>
 
 			</div>
