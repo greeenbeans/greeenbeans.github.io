@@ -25,7 +25,8 @@
 
 				<!-- Banner -->
 					<section id="intro" class="main">
-						<ul id="lightSlider" style="width: 7106px; height: 298px;">
+					<div class="demo">
+						<ul id="lightSlider" style="width: 100px; height: 298px;">
         						<li><img src="images/PumpkinSpice.JPG" /></li>
 						        <li><img src="images/cakePops.JPG"/></li>
    							<li><img src="images/teaAndScones.JPG"/></li>
@@ -42,7 +43,7 @@
 					
 
 
-
+					</div>	
 						
 					</section>
 				<!-- Footer -->
@@ -60,7 +61,13 @@
 		<!-- Scripts -->
 			<script type="text/javascript">
 			  $(document).ready(function() {
-			    $("#lightSlider").lightSlider(); 
+			    $('#lightSlider').lightSlider({
+			    gallery: true,
+			    item: 1,
+			    loop:true,
+			    slideMargin: 0,
+			    thumbItem: 9
+			    }); 
 			  });
 			</script>
 			<script src="assets/js/jquery.min.js"></script>
