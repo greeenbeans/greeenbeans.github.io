@@ -826,6 +826,7 @@
 				}
 
 		ul.icons {
+			text-align: center;
 			cursor: default;
 			list-style: none;
 			padding-left: 0;
@@ -1559,6 +1560,7 @@
 
 .demo {
     width:450px;
+    height:550px;
 }
 ul {
     list-style: none outside none;
@@ -1568,7 +1570,7 @@ ul {
 li {
     display: block;
     float: left;
-    margin-right: 6px;
+    margin-right: 2px;
     cursor:pointer;
 }
 img {
