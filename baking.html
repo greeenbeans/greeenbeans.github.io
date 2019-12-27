@@ -5,6 +5,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/b2.css" />
+       		<script src="js/jquery-1.12.2.min.js"></script>
+	        <script src="js/lightslider.min.js"></script>
+
 	</head>
 	<body>
 
@@ -20,6 +23,22 @@
 
 				<!-- Banner -->
 					<section id="intro" class="main">
+					<ul id="lightSlider">
+        						<li><img src="images/PumpkinSpice.JPG"/></li>
+						        <li><img src="images/cakePops.JPG"/></li>
+   							<li><img src="images/teaAndScones.JPG"/></li>
+        						<li><img src="images/chocolateCheesecakes.PNG"/></li>
+						        <li><img src="images/coconutCake.JPG"/></li>
+							<li><img src="images/Pumpkins.JPG"/></li>	
+							<li><img src="images/tiramisu.JPG" /></li>
+				                        <li><img src="images/cremePie.jpg" /></li>
+				                        <li><img src="images/bananaMuffins.jpg" /></li>
+        					</ul>	
+						<script type="text/javascript">
+            						$(document).ready(function () {
+         						$("#lightSlider").lightSlider({autoWidth:true});
+							});
+        					</script>
 					</section>
 				<!-- Footer -->
 					<footer id="footer">
@@ -41,3 +60,17 @@
 
 	</body>
 </html>
+
+
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#lightSlider").lightSlider({autoWidth:true});
+            });
+        </script>
+        </body>
+</html>
+
+
