@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="fibonacci.css">
+	<link rel="stylesheet" type="text/css" href="prism.css">
+	<link rel="stylesheet"
+	      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="header">
+	<a href="blog.html" class="logo">
+		<img src="assets/logo.png" style="width: 2rem;">
+		<span>fibonacci</span>
+	</a>
+	<nav>
+		<ul>
+			<li>
+				<a href="../index.html">home</a>
+			</li>
+			<li>
+				<a href="blog.html">blog</a>
+			</li>
+			<li>
+				<a href="contact.html">contact</a>
+			</li>
+			<li>
+				<a href="about.html">about</a>
+			</li>
+		</ul>
+	</nav>
+</header>
+
+<main class="main post-detail">
+	<article>
+		<header>
+			<div class="title-and-meta">
+				<h1>Hackasat 2: Take out the trash writeup</h1>
+ 
+				<div class="post-meta">
+					<div class="author">
+						<img src="assets/author_mini.png" width="15"/>
+						<span>Rahil Shah</span>
+					</div>
+
+					<div class="posted-date">
+						<span class="icon calendar"></span>
+						<span>June 27, 2021</span>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<figure class="full poster-image">
+			<img src="assets/210504-F-F3963-1001.JPG">
+		</figure>
+
+		<p>
+			I competed in hackasat 2 this weekend with DiceGang and we ended up getting 4th place. I solved this at 9 am after not sleeping so the thought process to solve this was a bit all over the place. Additionally, there was a lot of physics and less hacking than a usual ctf prompt. Still, it was a really fun experience and I'm excited for finals in September
+		</p>
+
+		<h2>Description</h2>
+		<blockquote>
+		<p>
+			A cloud of space junk is in your constellation's orbital plane. Use the space lasers on your satellites to vaporize it! Destroy at least 51 pieces of space junk to get the flag.<br><br>
+			The lasers have a range of 100 km and must be provided range and attitude to lock onto the space junk. Don't allow any space junk to approach closer than 10 km.<br><br>
+			Command format:<br><br>
+			[Time_UTC] [Sat_ID] FIRE [Qx] [Qy] [Qz] [Qw] [Range_km]<br><br>
+			Command example:<br><br>
+			2021177.014500 SAT1 FIRE -0.7993071278793108 0.2569145028089314 0.0 0.5432338847750264 47.85760531563315<br><br>
+			This command fires the laser from Sat1 on June 26, 2021 (day 177 of the year) at 01:45:00 UTC and expects the target to be approximately 48 km away. The direction would be a [0,0,1] vector in the J2000 frame rotated by the provided quaternion [-0.7993071278793108 0.2569145028089314 0.0 0.5432338847750264] in the form [Qx Qy Qz Qw].<br><br>
+			One successful laser command is provided for you (note: there are many possible combinations of time, attitude, range, and spacecraft to destroy the same piece of space junk):<br><br>
+			2021177.002200 SAT1 FIRE -0.6254112512084177 -0.10281341941423379 0.0 0.773492189779751 84.9530354564239
+		</p>
+		</blockquote>
+		<h3>Final Solve Script</h3>
+		<figure>
+<pre class="language-python" tabindex="0"><code class="language-python">
+	#calculate quaternion
+	def get_rot(dst):
+			src = np.array([0, 0, 1])
+			v = np.cross(src, dst)
+			c = np.dot(src, dst)
+			V = np.matrix([
+					[0, -v[2], v[1]],
+					[v[2], 0, -v[0]],
+					[-v[1], v[0], 0]])
+			R = np.identity(3) + V + 1/(1+c) * V @ V
+			return Rotation.from_matrix(R)
+	#calculate 3d distance
+	def calcDistance(x1,y1,z1,a1,b1,c1):
+		return np.sqrt((x-a)**2+(y-b)**2+(z-c)**2)
+	
+	
+	from scipy.spatial.transform import Rotation
+	from scipy.spatial import distance
+	from skyfield.api import load, EarthSatellite
+	from skyfield.functions import mxm
+	from skyfield.timelib import Time
+	from skyfield.framelib import ecliptic_J2000_frame
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from mpl_toolkits.mplot3d import Axes3D
+	
+	#initialize satellites and junk
+	satellites = load.tle_file('sats.tle')
+	junk = load.tle_file('spacejunk.tle')
+	
+	#initialize objects
+	ts   = load.timescale()
+	used = dict()
+	minu = np.arange(0,2500)
+	time = ts.utc(2021, 6, 26, 0, minu)
+	success = dict()
+	for junks in junk:
+		success[junks] = 0
+	
+	final = ""
+	
+	for junks in junk:
+			goal = junks
+			Jpos = goal.at(time).position.km
+			for i in range(len(satellites)):
+					if success[junks] == 1:
+						break
+					Rpos = satellites[i].at(time).position.km
+	
+					if True:
+						x, y, z = Rpos
+						a,b,c = Jpos
+						distance = calcDistance(x,y,z,a,b,c)
+						#check for possible deaths greedily
+						for d in distance:
+							if d <= 10:
+								print("fail" + str(distance))
+								print(satellites[i])
+								print(junks)
+						#check if within range with a 5 km buffer
+						for d in distance:
+							if success[junks] == 1:
+								break
+							if d < 95:
+								for k in range(len(distance)):
+									if d == distance[k]:
+										curr_t = ts.utc(2021, 6, 26, 0,k)
+										if satellites[i] not in used:
+											used[satellites[i]] = list()
+											used[satellites[i]].append(k)
+										else:
+											if k in used[satellites[i]]:
+													break
+											used[satellites[i]].append(k)
+										tim  = k
+										hours = int(tim/60)
+										minutes = int(tim % 60)
+										thing = str(satellites[i]).split(" ")
+										frame = (junks - satellites[i]).at(curr_t).position.km
+										dst = frame / np.linalg.norm(frame)
+										q = get_rot(dst).as_quat()
+										#super obnoxious formatting
+										final += (("2021177.{:02d}{:02d}00 " + thing[0].upper() +" FIRE "+ str(q[0]) + " "+ str(q[1]) + " "+str(q[2]) + " " + str(q[3]) + " " + str(d) + "\n").format(hours, minutes))
+										success[junks] = 1
+										break
+	
+	#sorting the commands by time
+	x = final.split("\n")
+	x.sort()
+	for i in x:
+			print(i)
+</code></pre>
+		</figure>
+
+		<hr>
+
+		
+	</article>
+</main>
+
+<footer class="footer">
+	&copy; 2018 &middot; All Rights Reserved
+</footer>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="fibonacci.js"></script>
+<script src="prism.js"></script>
+</body>
+</html>
