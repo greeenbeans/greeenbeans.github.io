@@ -7,6 +7,29 @@
 	<link rel="stylesheet"
 	      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+	<script type="text/javascript">
+		(function() {
+			// https://dashboard.emailjs.com/admin/integration
+			emailjs.init('user_35QT0rSn3eWP9sQDdS2VN');
+		})();
+	</script>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById('contact-form').addEventListener('submit', function(event) {
+				event.preventDefault();
+				// these IDs from the previous steps
+				emailjs.sendForm('contact_service', 'contact_form', this)
+					.then(function() {
+						console.log('SUCCESS!');
+					}, function(error) {
+						console.log('FAILED...', error);
+					});
+			});
+		}
+	</script>
+
+
 </head>
 <body>
 
@@ -44,26 +67,25 @@
 			right spot! Please use the below contact form to send your query.
 		</p>
 
-		<form id="contact-form" method="post" action="contact.php">
+		<form id="contact-form">
 			<div>
 				<p class="form-field">
 					<label for="Name">Name: (*)</label>
 					<input required type="text" name="Name" id="Name" maxlength="50" title="Name required">
 				</p>
 				<p class="form-field">
-					<label for="ReplyTo">E-mail: (*)</label>
-					<input required type="text" name="ReplyTo" id="ReplyTo" maxlength="50" title="Email required">
+					<label for="ReplyTo">E-mail:</label>
+					<input  type="text" name="ReplyTo" id="ReplyTo" maxlength="50" title="Email">
 				</p>
 				<p class="form-field">
-					<label for="subject">Subject: (*)</label>
-					<input required type="text" name="Subject" id="Subject" maxlength="250" title="Subject required">
+					<label for="subject">Subject:</label>
+					<input type="text" name="Subject" id="Subject" maxlength="250" title="Subject">
 				</p>
 				<p class="form-field">
 					<label for="Body">Message: (*)</label>
 					<textarea required name="Body" id="Body" title="Message required" rows="8" cols="50"></textarea>
 				</p>
-
-				<input type="submit" name="submit" value="Send Message" id="submit">
+				<input type="submit" value="Send">
 			</div>
 		</form>
 	</article>
